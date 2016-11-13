@@ -1,13 +1,36 @@
 $(document).ready(function() {
-  $('#roller button.add').on('click', function() {
-    console.log("WAT")
-    $('.dice').append('<div class="die">0</div>')
-  })
+  controller_.addDice();
+  controller_.generateDiceValue();
+})
 
-  $('#roller button.roll').on('click', function() {
+class view {
+  generate_dice(){
+    return '<div class="die">0</div>';
+  }
+  appendDice(){
+    $('.dice').append(this.generate_dice());
+  }
+  display_value(){
     $('.die').each(function(k, die) {
       var value = Math.floor((Math.random()*6)+1)
       $(die).text(value)
     })
-  })
-})
+  }
+}
+
+class controller {
+
+  addDice() {
+    $('#roller button.add').on('click', function() {
+      view_.appendDice()
+    })
+  }
+  generateDiceValue() {
+    $('#roller button.roll').on('click', function() {
+      console.log(`update dice value controller from public/javascripts/controller_object/controller.js`);
+      view_.display_value()
+    })
+  }
+}
+var view_ = new view();
+var controller_ = new controller();
